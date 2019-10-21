@@ -1,6 +1,8 @@
-import networkx
+# -*- coding: utf-8 -*-
+
 import re
-import sys
+
+from konlpy.tag import Komoran
 
 
 class RawSentence:
@@ -9,13 +11,17 @@ class RawSentence:
             self.textIter = textIter.split('\n')
         else:
             self.textIter = textIter
+
         self.rgxSplitter = re.compile('([.!?:](?:["\']|(?![0-9])))')
 
     def __iter__(self):
         for line in self.textIter:
             ch = self.rgxSplitter.split(line)
+
             for s in map(lambda a, b: a + b, ch[::2], ch[1::2]):
-                if not s: continue
+                if not s:
+                    continue
+
                 yield s
 
 
@@ -28,8 +34,11 @@ class RawSentenceReader:
     def __iter__(self):
         for line in open(self.filepath, encoding='utf-8'):
             ch = self.rgxSplitter.split(line)
+
             for s in map(lambda a, b: a + b, ch[::2], ch[1::2]):
-                if not s: continue
+                if not s:
+                    continue
+
                 yield s
 
 
@@ -38,19 +47,23 @@ class RawTagger:
         if tagger:
             self.tagger = tagger
         else:
-            from konlpy.tag import Komoran
             self.tagger = Komoran()
+
         if type(textIter) == str:
             self.textIter = textIter.split('\n')
         else:
             self.textIter = textIter
+
         self.rgxSplitter = re.compile('([.!?:](?:["\']|(?![0-9])))')
 
     def __iter__(self):
         for line in self.textIter:
             ch = self.rgxSplitter.split(line)
+
             for s in map(lambda a, b: a + b, ch[::2], ch[1::2]):
-                if not s: continue
+                if not s:
+                    continue
+
                 yield self.tagger.pos(s)
 
 
@@ -59,16 +72,17 @@ class RawTaggerReader:
         if tagger:
             self.tagger = tagger
         else:
-            from konlpy.tag import Komoran
             self.tagger = Komoran()
+
         self.filepath = filepath
         self.rgxSplitter = re.compile('([.!?:](?:["\']|(?![0-9])))')
 
     def __iter__(self):
         for line in open(self.filepath, encoding='utf-8'):
-            # print(line)
             ch = self.rgxSplitter.split(line)
+
             for s in map(lambda a, b: a + b, ch[::2], ch[1::2]):
-                # print(s)
-                if not s: continue
+                if not s:
+                    continue
+
                 yield self.tagger.pos(s)
