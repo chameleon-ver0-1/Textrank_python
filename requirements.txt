@@ -2,7 +2,7 @@ Flask==1.0.2
 Flask-RESTful==0.3.7
 Flask-Script==2.0.6
 Flask-Twisted==0.1.2
-requests==2.19.1
+requests==2.20.0
 PyJWT==1.7.1
 networkx==2.4
 JPype1==0.7.0
