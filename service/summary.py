@@ -26,6 +26,3 @@ class Summary:
         #     print("\t".join([str(k), str(ranks[k]), str(tr.dictCount[k])]))
 
         print(tr.summarize(0.3))
-
-
-
