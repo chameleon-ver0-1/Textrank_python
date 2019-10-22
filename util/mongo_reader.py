@@ -13,19 +13,21 @@ class MongoReader:
 
             topics = []
             contents = {}
+            contents_temp = {}
 
             for log in cursor:
                 if 'topic' not in log or log['topic'] == 'undefined' or log['topic'] == 'system':
                     continue
 
                 tag = log['topic']
-                contents_temp = []
 
                 if tag not in topics:
                     topics.append(tag)
 
-                contents_temp.append(log['content'])
-                contents[tag] = '. '.join(contents_temp) + '.'
+                contents_temp[tag].append(log['content'])
+
+            for topic in topics:
+                contents[topic] = '. '.join(contents_temp[topic]) + '.'
 
             print('======reader======')
             print(topics)
