@@ -1,18 +1,18 @@
 from common.textrank import TextRank
-from common.reader import RawTaggerReader
+from common.reader import RawTagger
 
 
 class Keyword:
     _stop_word = set()
 
-    def __init__(self, filepath: str, stop_word: list):
-        self._filepath = filepath
+    def __init__(self, content: str, stop_word: list):
+        self._content = content
         self._stop_word.add(stop_word)
 
     def run(self) -> dict:
         tr = TextRank(window=5, coef=1)
 
-        tr.load(RawTaggerReader(self._filepath),
+        tr.load(RawTagger(self._content),
                 lambda w: w not in self._stop_word and (w[1] in ('NNG', 'NNP', 'VV', 'VA')))
 
         tr.build()
