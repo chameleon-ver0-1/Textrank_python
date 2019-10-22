@@ -34,8 +34,15 @@ class MakeSummary(Resource):
 
                 text = contents[topic]
 
-                summary[topic] = Summary(text, summary_stop_word).run()
-                keyword[topic] = Keyword(text, keyword_stop_word).run()
+                summary_temp = Summary(text, summary_stop_word).run()
+                keyword_temp = Keyword(text, keyword_stop_word).run()
+
+                print(' -*-*- SEMI-TEMP -*-*- ')
+                print(summary_temp)
+                print(keyword_temp)
+
+                summary[topic] = summary_temp
+                keyword[topic] = keyword_temp
 
                 print(' -*-*- SEMI-RESULT -*-*- ')
                 print(summary[topic])
