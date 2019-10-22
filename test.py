@@ -2,43 +2,15 @@ import sys
 
 from konlpy.tag import Komoran
 from common.textrank import TextRank
-from common.file_reader import RawSentenceReader
-from common.file_reader import RawTaggerReader
-from common.file_reader import RawSentence
+from common.reader import RawSentenceReader
+from common.reader import RawTaggerReader
+from common.reader import RawSentence
+
+
 
 
 """
-    Trial: 1
-"""
-
-tr = TextRank()
-
-tagger = Komoran()
-stop_word = set()
-stop_word.add([('있', 'VV'), ('하', 'VV'), ('되', 'VV')])
-
-tr.load_sentences(RawSentenceReader('test4.txt'),
-                  lambda sent: filter(lambda x:
-                                      x not in stop_word and x[1] in ('NNG', 'NNP', 'VV', 'VA'),
-                                      tagger.pos(sent)))
-
-# tr.load_sentences(RawSentence(sys.argv[1]),
-#                   lambda sent: filter(lambda x:
-#                                       x not in stop_word and x[1] in ('NNG', 'NNP', 'VV', 'VA'),
-#                                       tagger.pos(sent)))
-# print('Build...')
-
-tr.build()
-ranks = tr.rank()
-
-# for k in sorted(ranks, key=ranks.get, reverse=True)[:100]:
-#     print("\t".join([str(k), str(ranks[k]), str(tr.dictCount[k])]))
-
-print(tr.summarize(0.3))
-
-
-"""
-    Trial: 2
+    Trial: keyword
 """
 
 tr = TextRank(window=5, coef=1)
