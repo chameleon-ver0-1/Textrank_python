@@ -1,20 +1,20 @@
 from konlpy.tag import Komoran
 from common.textrank import TextRank
-from common.reader import RawSentenceReader
+from common.reader import RawSentence
 
 
 class Summary:
     _stop_word = set()
 
-    def __init__(self, filepath: str, stop_word: list):
-        self._filepath = filepath
+    def __init__(self, content: str, stop_word: list):
+        self._content = content
         self._stop_word.add(stop_word)
 
-    def run(self):
+    def run(self) -> str:
         tr = TextRank()
         tagger = Komoran()
 
-        tr.load_sentences(RawSentenceReader(self._filepath),
+        tr.load_sentences(RawSentence(self._content),
                           lambda sent: filter(lambda x:
                                               x not in self._stop_word and x[1] in ('NNG', 'NNP', 'VV', 'VA'),
                                               tagger.pos(sent)))
@@ -25,4 +25,4 @@ class Summary:
         # for k in sorted(ranks, key=ranks.get, reverse=True)[:100]:
         #     print("\t".join([str(k), str(ranks[k]), str(tr.dictCount[k])]))
 
-        print(tr.summarize(0.3))
+        return str(tr.summarize(0.3))
