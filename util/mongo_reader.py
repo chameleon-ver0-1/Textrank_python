@@ -23,6 +23,7 @@ class MongoReader:
 
                 if tag not in topics:
                     topics.append(tag)
+                    contents_temp[tag] = []
 
                 contents_temp[tag].append(log['content'])
 
