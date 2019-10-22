@@ -34,6 +34,7 @@ class MongoReader:
             return topics, contents
 
         except Exception as e:
+            print('error in mongo_reader.py')
             print(e)
             return False, False
 
