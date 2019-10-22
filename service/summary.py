@@ -4,11 +4,10 @@ from common.reader import RawSentence
 
 
 class Summary:
-    _stop_word = set()
 
     def __init__(self, content: str, stop_word: list):
         self._content = content
-        self._stop_word.add(stop_word)
+        self._stop_word = stop_word
 
     def run(self) -> str:
         tr = TextRank()

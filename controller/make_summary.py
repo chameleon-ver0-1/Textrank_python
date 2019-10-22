@@ -25,8 +25,8 @@ class MakeSummary(Resource):
             summary = {}
             keyword = {}
 
-            summary_stop_word = [('있', 'VV'), ('하', 'VV'), ('되', 'VV')]
-            keyword_stop_word = [('있', 'VV'), ('하', 'VV'), ('되', 'VV'), ('없', 'VV')]
+            summary_stop_word = set([('있', 'VV'), ('하', 'VV'), ('되', 'VV')])
+            keyword_stop_word = set([('있', 'VV'), ('하', 'VV'), ('되', 'VV'), ('없', 'VV')])
 
             for topic in topics:
                 if topic not in contents:

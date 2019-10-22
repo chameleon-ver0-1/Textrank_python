@@ -3,11 +3,10 @@ from common.reader import RawTagger
 
 
 class Keyword:
-    _stop_word = set()
 
     def __init__(self, content: str, stop_word: list):
         self._content = content
-        self._stop_word.add(stop_word)
+        self._stop_word = stop_word
 
     def run(self) -> dict:
         tr = TextRank(window=5, coef=1)
