@@ -18,7 +18,7 @@ class MongoReader:
             for log in cursor:
                 print(log)
 
-                if 'topic' not in log or log['topic'] == 'undefined':
+                if 'topic' not in log or log['topic'] == 'undefined' or log['topic'] == 'system':
                     continue
 
                 tag = log['topic']

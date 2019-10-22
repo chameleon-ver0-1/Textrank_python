@@ -19,8 +19,6 @@ class MakeSummary(Resource):
             reader = MongoReader(room_id)
             topics, contents = reader.read_topic_n_content()
 
-            filepath = 'text4.txt'
-
             # Abstract summary, keywords
             summary = {}
             keyword = {}
