@@ -29,10 +29,17 @@ class MakeSummary(Resource):
             keyword_stop_word = [('있', 'VV'), ('하', 'VV'), ('되', 'VV'), ('없', 'VV')]
 
             for topic in topics:
+                if topic not in contents:
+                    continue
+
                 text = contents[topic]
 
                 summary[topic] = Summary(text, summary_stop_word).run()
                 keyword[topic] = Keyword(text, keyword_stop_word).run()
+
+                print(' -*-*- SEMI-RESULT -*-*- ')
+                print(summary[topic])
+                print(keyword[topic])
 
             # FIXME: 예지언니 여기서 API 기록 부탁해 사랑해 하트하트
             print('==== Conference Log Summary ====')
@@ -50,6 +57,7 @@ class MakeSummary(Resource):
             }
 
         except Exception as e:
+            print(e)
             return {'status': '500', 'message': f'{e}'}
 
 

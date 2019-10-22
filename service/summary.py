@@ -25,4 +25,4 @@ class Summary:
         # for k in sorted(ranks, key=ranks.get, reverse=True)[:100]:
         #     print("\t".join([str(k), str(ranks[k]), str(tr.dictCount[k])]))
 
-        return str(tr.summarize(0.3))
+        return tr.summarize(0.3)
