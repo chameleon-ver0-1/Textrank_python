@@ -16,7 +16,9 @@ class MongoReader:
             contents_temp = {}
 
             for log in cursor:
-                if log['topic'] == 'undefined':
+                print(log)
+
+                if 'topic' not in log or log['topic'] == 'undefined':
                     continue
 
                 tag = log['topic']
