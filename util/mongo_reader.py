@@ -30,7 +30,7 @@ class MongoReader:
                 contents_temp[tag].append(log['content'])
 
             for topic in topics:
-                contents['topic'] = '.\n'.join(contents_temp[topic]) + '.'
+                contents[topic] = '.\n'.join(contents_temp[topic]) + '.'
 
             print('======reader======')
             print(topics)
