@@ -34,6 +34,11 @@ class MakeSummary(Resource):
                 summary[topic] = Summary(text, summary_stop_word).run()
                 keyword[topic] = Keyword(text, keyword_stop_word).run()
 
+            # FIXME: 예지언니 여기서 API 기록 부탁해 사랑해 하트하트
+            print('==== Conference Log Summary ====')
+            print(summary)
+            print(keyword)
+
             return {
                 'status': 'res.status_code',
                 'data': {
