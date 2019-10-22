@@ -7,9 +7,9 @@ class MongoReader:
 
     def read_topic_n_content(self):
         try:
-            db = MongoClient('mongodb://localhost/develop')
+            db = MongoClient('mongodb://localhost/')
 
-            cursor = db['log'].find({'roomId': self._room_id}).sort("createdAt")
+            cursor = db['develop']['logs'].find({'roomId': self._room_id}).sort("createdAt")
 
             topics = []
             contents = {}
