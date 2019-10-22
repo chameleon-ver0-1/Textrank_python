@@ -9,7 +9,7 @@ class MongoReader:
         try:
             db = MongoClient('mongodb://localhost/develop')
 
-            cursor = db.log.find({'roomId': self._room_id}).sort("createdAt")
+            cursor = db['log'].find({'roomId': self._room_id}).sort("createdAt")
 
             topics = []
             contents = {}
