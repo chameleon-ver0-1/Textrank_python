@@ -1,5 +1,7 @@
 from flask_restful import Resource
 
+import traceback
+
 from service.keyword import Keyword
 from service.summary import Summary
 from util.mongo_reader import MongoReader
@@ -63,6 +65,7 @@ class MakeSummary(Resource):
 
         except Exception as e:
             print(e)
+            print(traceback.format_exc())
             return {'status': '500', 'message': f'{e}'}
 
 
