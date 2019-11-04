@@ -20,6 +20,7 @@ class Keyword:
         abstracted_keywords = {}
 
         for k in sorted(kw, key=kw.get, reverse=True):
-            abstracted_keywords[f'{k}'] = f'{kw[k]}'
+            # TODO: 예지 수정 --> 배열접근위해 문자열형식에서 원래 형식으로 바꿈
+            abstracted_keywords[k] = kw[k]
 
         return abstracted_keywords
