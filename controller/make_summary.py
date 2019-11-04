@@ -22,53 +22,45 @@ class MakeSummary(Resource):
             topics, contents = reader.read_topic_n_content()
 
             # Abstract summary, keywords
-            # summary = {}
-            # keyword = {}
-            #
-            # summary_stop_word = set([('있', 'VV'), ('하', 'VV'), ('되', 'VV')])
-            # keyword_stop_word = set([('있', 'VV'), ('하', 'VV'), ('되', 'VV'), ('없', 'VV')])
-            #
-            # for topic in topics:
-            #     if topic not in contents:
-            #         continue
-            #
-            #     text = contents[topic]
-            #
-            #     summary_temp = Summary(text, summary_stop_word).run()
-            #     keyword_temp = Keyword(text, keyword_stop_word).run()
-            #
-            #     print(' -*-*- SEMI-TEMP -*-*- ')
-            #     print(summary_temp)
-            #     print(keyword_temp)
-            #
-            #     summary[topic] = summary_temp
-            #     keyword[topic] = keyword_temp
-            #
-            #     print(' -*-*- SEMI-RESULT -*-*- ')
-            #     print(summary[topic])
-            #     print(keyword[topic])
-            #
-            # # FIXME: 예지언니 여기서 API 기록 부탁해 사랑해 하트하트
-            # print('==== Conference Log Summary ====')
-            # print(summary)
-            # print(keyword)
-            #
-            # return {
-            #     'status': 'res.status_code',
-            #     'data': {
-            #         'topics': topics,
-            #         'summary': summary,
-            #         'keyword': keyword
-            #     },
-            #     'message': 'done!'
-            # }
+            summary = {}
+            keyword = {}
+
+            summary_stop_word = set([('있', 'VV'), ('하', 'VV'), ('되', 'VV')])
+            keyword_stop_word = set([('있', 'VV'), ('하', 'VV'), ('되', 'VV'), ('없', 'VV')])
+
+            for topic in topics:
+                if topic not in contents:
+                    continue
+
+                text = contents[topic]
+
+                summary_temp = Summary(text, summary_stop_word).run()
+                keyword_temp = Keyword(text, keyword_stop_word).run()
+
+                print(' -*-*- SEMI-TEMP -*-*- ')
+                print(summary_temp)
+                print(keyword_temp)
+
+                summary[topic] = summary_temp
+                keyword[topic] = keyword_temp
+
+                print(' -*-*- SEMI-RESULT -*-*- ')
+                print(summary[topic])
+                print(keyword[topic])
+
+            # FIXME: 예지언니 여기서 API 기록 부탁해 사랑해 하트하트
+            print('==== Conference Log Summary ====')
+            print(summary)
+            print(keyword)
 
             return {
-                'status': 200,
+                'status': 'res.status_code',
                 'data': {
                     'topics': topics,
-                    'content': contents
-                }
+                    'summary': summary,
+                    'keyword': keyword
+                },
+                'message': 'done!'
             }
 
         except Exception as e:
