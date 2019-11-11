@@ -22,6 +22,9 @@ class MakeSummary(Resource):
             reader = MongoReader(room_id)
             topics, p_contents = reader.read_topic_n_content()
 
+            print(topics)
+            print(p_contents)
+
             # TODO: 예지 : 주제별요약&키워드가 담길 배열 변수 --> 이부분이 요청으로 들어갈 2개의 변수 아래 예시데이터보면 확인할 수 있음
             contents = []
             keywords = []
@@ -76,39 +79,9 @@ class MakeSummary(Resource):
                         "value": int((val/total)*100)
                     })
 
-            # TODO: 소영아 내가 느려서 미안해 파이썬을 잘못하는 나의 잘못이야 이렇게 메모를 남겨
-
-            # TODO: 예시 데이터 형식
-            # {
-            #    "keywords":[
-            #    {
-            #        "keyword":"지후",
-            #        "value":15
-            #    },
-            #    {
-            #        "keyword":"예지",
-            #        "value":8
-            #        
-            #    }
-            #    ],
-            #    "contents":[
-            #        {
-            #            "topic":"소영이는 정말 대단해",
-            #            "content":"소영이 화이팅"
-            #        },
-            #        {
-            #            "topic":"윤영이는 너무 똑똑해",
-            #            "content":"윤영이 거짓말쟁이"
-            #        },
-            #        {
-            #            "topic":"예지는 언제쯤 그만 똑똑할까",
-            #            "content":"지후 미안"
-            #        }
-            #    ]
-            #}
             print('==== Conference Log Summary ====')
-            print(summary)
-            print(keyword)
+            print(contents)
+            print(keywords)
 
             res = requests.post(f'https://a.chameleon4switch.cf/api/conf_log/create/{room_id}', data=json.dumps({
                 "keywords": keywords,
@@ -117,7 +90,7 @@ class MakeSummary(Resource):
 
             return {
                 'status': res.status_code,
-                'message': res.text
+                'message': res.json()['message']
             }
 
         except Exception as e:
