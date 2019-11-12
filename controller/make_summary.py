@@ -35,31 +35,46 @@ class MakeSummary(Resource):
 
             summary_stop_word = set([
                 ('있', 'VV'), ('웃', 'VV'), ('와우', 'IC'), ('시작', 'NNG'), ('협조', 'NNG'), ('하', 'VV'), ('되', 'VV'),
-                ('이','VCP'), ('것','NNB'), ('들','XSN'), ('그','MM'), ('수','NNB'), ('이','NP'), ('보','VX'), ('않','VX'),
-                ('없','VA'), ('나','NP'), ('주','VV'), ('아니','VCN'), ('등','NNB'), ('같','VA'), ('우리','NP'), ('때','NNG'),
-                ('년','NNB'), ('가','VV'), ('한','MM'), ('지','VX'), ('대하','VV'), ('오', 'VV'),('그렇','VA'),('위하','VV'),('그것','NP'),('두','VV'),('그러나','MAJ'),('못하','VX'),('그런','MM'),('또','MAG'),('더','MAG'),('그리고','MAJ'),('중','NNB'),('씨','NNB'),('지금','NNG'),('그러','VV'),('속','NNG'),('데','NNB'),('안','MAG'),('어떤','MM'),('내','NP'),('다시','MAG'),('이런','MM'),('번','NNB'),('나','VX'),('어떻','VA'),('개','NNB'),('이렇','VA'),('점','NNG'),('좀','MAG'),('잘','MAG'),('이빨','NNG')])
+                ('이', 'VCP'), ('것', 'NNB'), ('들', 'XSN'), ('그', 'MM'), ('수', 'NNB'), ('이', 'NP'), ('보', 'VX'),
+                ('않', 'VX'), ('없', 'VA'), ('나', 'NP'), ('주', 'VV'), ('아니', 'VCN'), ('등', 'NNB'), ('같', 'VA'),
+                ('우리', 'NP'), ('때', 'NNG'), ('년', 'NNB'), ('가', 'VV'), ('한', 'MM'), ('지', 'VX'), ('대하', 'VV'),
+                ('오', 'VV'), ('그렇', 'VA'), ('위하', 'VV'), ('그것', 'NP'), ('두', 'VV'), ('그러나', 'MAJ'), ('못하', 'VX'),
+                ('그런', 'MM'), ('또', 'MAG'), ('더', 'MAG'), ('그리고', 'MAJ'), ('중', 'NNB'), ('씨', 'NNB'), ('지금', 'NNG'),
+                ('그러', 'VV'), ('속', 'NNG'),  ('데', 'NNB'), ('안', 'MAG'),  ('어떤', 'MM'), ('내', 'NP'), ('다시', 'MAG'),
+                ('이런', 'MM'), ('번', 'NNB'), ('나', 'VX'), ('어떻', 'VA'), ('개', 'NNB'), ('이렇', 'VA'), ('점', 'NNG'),
+                ('좀', 'MAG'), ('잘', 'MAG'), ('이빨', 'NNG')])
     
-            keyword_stop_word = set([('있', 'VV'), ('웃', 'VV'),('와우', 'IC'),('시작', 'NNG'), ('협조', 'NNG'),('하', 'VV'), ('되', 'VV'),('이','VCP'),('것','NNB'),('들','XSN'),('그','MM'),('수','NNB'),('이','NP'),('보','VX'),('않','VX'),('없','VA'),('나','NP'),('주','VV'),('아니','VCN'),('등','NNB'),('같','VA'),('우리','NP'),('때','NNG'),('년','NNB'),('가','VV'),('한','MM'),('지','VX'),('대하','VV'),('오','VV'),('그렇','VA'),('위하','VV'),('그것','NP'),('두','VV'),('그러나','MAJ'),('못하','VX'),('그런','MM'),('또','MAG'),('더','MAG'),('그리고','MAJ'),('중','NNB'),('씨','NNB'),('지금','NNG'),('그러','VV'),('속','NNG'),('데','NNB'),('안','MAG'),('어떤','MM'),('내','NP'),('다시','MAG'),('이런','MM'),('번','NNB'),('나','VX'),('어떻','VA'),('개','NNB'),('이렇','VA'),('점','NNG'),('좀','MAG'),('잘','MAG'),('이빨','NNG')])
+            keyword_stop_word = set([
+                ('있', 'VV'), ('웃', 'VV'), ('와우', 'IC'), ('시작', 'NNG'), ('협조', 'NNG'), ('하', 'VV'), ('되', 'VV'),
+                ('이', 'VCP'), ('것', 'NNB'), ('들', 'XSN'), ('그',  'MM'), ('수', 'NNB'), ('이', 'NP'), ('보', 'VX'),
+                ('않', 'VX'), ('없', 'VA'), ('나', 'NP'), ('주', 'VV'), ('아니', 'VCN'), ('등', 'NNB'), ('같','VA'),
+                ('우리', 'NP'), ('때', 'NNG'), ('년', 'NNB'), ('가', 'VV'), ('한', 'MM'), ('지', 'VX'), ('대하', 'VV'),
+                ('오', 'VV'), ('그렇', 'VA'), ('위하', 'VV'), ('그것', 'NP'), ('두', 'VV'), ('그러나', 'MAJ'), ('못하', 'VX'),
+                ('그런', 'MM'), ('또', 'MAG'), ('더', 'MAG'), ('그리고', 'MAJ'), ('중', 'NNB'), ('씨', 'NNB'), ('지금', 'NNG'),
+                ('그러', 'VV'), ('속', 'NNG'), ('데', 'NNB'), ('안', 'MAG'), ('어떤', 'MM'), ('내', 'NP'), ('다시', 'MAG'),
+                ('이런', 'MM'), ('번', 'NNB'), ('나', 'VX'), ('어떻', 'VA'), ('개', 'NNB'), ('이렇', 'VA'), ('점', 'NNG'),
+                ('좀', 'MAG'), ('잘', 'MAG'), ('이빨', 'NNG')
+            ])
 
+            # abstract summary, keywords from whole data
             for topic in topics:
                 if topic not in p_contents:
                     continue
 
                 text = p_contents[topic]
 
+                print(' -*-*- WHOLE-TEXT -*-*- ')
+                print(text)
+
                 summary_temp = Summary(text, summary_stop_word).run()
                 keyword_temp = Keyword(text, keyword_stop_word).run()
 
-                print(' -*-*- SEMI-TEMP -*-*- ')
-                print(summary_temp)
-                print(keyword_temp)
+                print(' -*-*- SEMI-RESULT -*-*- ')
+                print(f"summary_temp => {summary_temp}")
+                print(f"keyword_temp => {keyword_temp}")
 
                 summary[topic] = summary_temp
                 keyword[topic] = keyword_temp
-
-                print(' -*-*- SEMI-RESULT -*-*- ')
-                print(summary[topic])
-                print(keyword[topic])
 
                 # TODO: 예지 - 주제별 요약
                 contents.append({
@@ -79,18 +94,22 @@ class MakeSummary(Resource):
                         "value": int((val/total)*100)
                     })
 
+            total_to_convert = 0
+            for word_val in keywords:
+                total_to_convert += word_val["value"]
+            for word_val in keywords:
+                word_val['value'] = int(word_val['value']*(7/total_to_convert) + 8)
+
             print('==== Conference Log Summary ====')
             print(contents)
             print(keywords)
 
-            res = requests.post(f'https://a.chameleon4switch.cf/api/conf_log/create/{room_id}', data=json.dumps({
-                "keywords": keywords,
-                "contents": contents
-            }))
-
             return {
-                'status': res.status_code,
-                'message': res.json()['message']
+                'status': 200,
+                'data': json.dumps({
+                    "keywords": keywords,
+                    "contents": contents
+                })
             }
 
         except Exception as e:
