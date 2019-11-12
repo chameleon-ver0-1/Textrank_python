@@ -106,10 +106,10 @@ class MakeSummary(Resource):
 
             return {
                 'status': 200,
-                'data': {
+                'data': json.dumps({
                     "keywords": keywords,
                     "contents": contents
-                }
+                })
             }
 
         except Exception as e:
