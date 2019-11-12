@@ -104,17 +104,12 @@ class MakeSummary(Resource):
             print(contents)
             print(keywords)
 
-            res = requests.post(f'https://a.chameleon4switch.cf/api/conf_log/create/{room_id}', data=json.dumps({
-                "keywords": keywords,
-                "contents": contents
-            }))
-
-            res_json = res.json()
-            print(f"response data => {res_json}")
-
             return {
-                'status': res.status_code,
-                'data': res_json['message']
+                'status': 200,
+                'data': {
+                    "keywords": keywords,
+                    "contents": contents
+                }
             }
 
         except Exception as e:
