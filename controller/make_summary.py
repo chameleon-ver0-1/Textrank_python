@@ -98,7 +98,7 @@ class MakeSummary(Resource):
             for word_val in keywords:
                 total_to_convert += word_val["value"]
             for word_val in keywords:
-                word_val['value'] = int(word_val['value']*(7/total_to_convert) + 8)
+                word_val['value'] = int((word_val['value']*7)/total_to_convert) + 8
 
             print('==== Conference Log Summary ====')
             print(contents)
