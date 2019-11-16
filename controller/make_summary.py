@@ -99,6 +99,13 @@ class MakeSummary(Resource):
                 total_to_convert += word_val["value"]
             for word_val in keywords:
                 word_val['value'] = int((word_val['value']*7)/total_to_convert) + 8
+            count_count = [15, 13, 11]
+            for word_val in keywords:
+                if len(count_count) == 0:
+                    break
+
+                word_val['value'] = count_count[0]
+                count_count.pop(0)
 
             print('==== Conference Log Summary ====')
             print(contents)
