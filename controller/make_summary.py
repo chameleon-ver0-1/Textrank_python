@@ -105,7 +105,7 @@ class MakeSummary(Resource):
             print(keywords)
 
             return {
-                'statusCode': 200,
+                'status': 200,
                 'data': json.dumps({
                     "keywords": keywords,
                     "contents": contents
@@ -115,13 +115,13 @@ class MakeSummary(Resource):
         except Exception as e:
             print(e)
             print(traceback.format_exc())
-            return {'statusCode': '500', 'message': f'{e}'}
+            return {'status': '500', 'message': f'{e}'}
 
 
 class TestFlask(Resource):
     def post(self):
         try:
-            return {'statusCode': '200', 'message': 'hello!'}
+            return {'status': '200', 'message': 'hello!'}
 
         except Exception as e:
-            return {'statusCode': '500', 'message': f'{e}'}
+            return {'status': '500', 'message': f'{e}'}
